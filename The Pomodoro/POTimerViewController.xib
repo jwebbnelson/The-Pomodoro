@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="roundLabel" destination="X4M-7e-UuV" id="pu5-SQ-OUG"/>
                 <outlet property="startButton" destination="V5j-BD-jGg" id="d5B-0t-VP8"/>
+                <outlet property="stopButton" destination="bC3-hm-B88" id="R1Q-yi-Bqr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,32 +24,117 @@
                         <constraint firstAttribute="height" constant="227" id="RxE-Re-vl3"/>
                         <constraint firstAttribute="width" constant="237" id="x8d-km-Lbg"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="44"/>
                     <state key="normal" title="START">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="42"/>
+                        <rect key="frame" x="82" y="66" width="238" height="91"/>
+                        <mask key="constraints">
+                            <exclude reference="RxE-Re-vl3"/>
+                            <exclude reference="x8d-km-Lbg"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="startRound:" destination="-1" eventType="touchUpInside" id="fMF-Um-5RC"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Round:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4M-7e-UuV">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4M-7e-UuV">
                     <rect key="frame" x="184" y="336" width="233" height="102"/>
                     <constraints>
+                        <constraint firstAttribute="width" constant="309" id="BOb-gZ-aeT"/>
                         <constraint firstAttribute="width" constant="233" id="Uj7-xS-frj"/>
                         <constraint firstAttribute="height" constant="102" id="VEu-Ot-lok"/>
+                        <constraint firstAttribute="height" constant="106" id="cTz-Qx-m1a"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="41"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.88465896759999996" green="0.88502031709999995" blue="0.89733684390000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="6" height="2"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="BOb-gZ-aeT"/>
+                            <exclude reference="cTz-Qx-m1a"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                        <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="100"/>
+                        <rect key="frame" x="46" y="246" width="309" height="106"/>
+                        <mask key="constraints">
+                            <include reference="BOb-gZ-aeT"/>
+                            <exclude reference="Uj7-xS-frj"/>
+                            <exclude reference="VEu-Ot-lok"/>
+                            <include reference="cTz-Qx-m1a"/>
+                        </mask>
+                    </variation>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bC3-hm-B88">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <state key="normal" title="STOP">
+                        <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="42"/>
+                        <rect key="frame" x="93" y="469" width="217" height="60"/>
+                    </variation>
+                    <connections>
+                        <action selector="stopRound:" destination="-1" eventType="touchUpInside" id="HFg-j2-kfC"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.9591174608655616" green="0.9591174608655616" blue="0.9591174608655616" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="bC3-hm-B88" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="123" id="B6c-Iw-qcW">
+                    <variation key="heightClass=regular-widthClass=compact" constant="93"/>
+                </constraint>
+                <constraint firstAttribute="trailing" secondItem="V5j-BD-jGg" secondAttribute="trailing" constant="80" id="LfJ-yh-2JF"/>
                 <constraint firstItem="X4M-7e-UuV" firstAttribute="centerX" secondItem="V5j-BD-jGg" secondAttribute="centerX" id="R0i-jy-Jfz"/>
+                <constraint firstItem="V5j-BD-jGg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="82" id="Xd5-z4-LhQ"/>
                 <constraint firstItem="X4M-7e-UuV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bCm-tp-lKf"/>
+                <constraint firstItem="V5j-BD-jGg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="66" id="c0B-P8-DKr"/>
+                <constraint firstItem="bC3-hm-B88" firstAttribute="top" secondItem="X4M-7e-UuV" secondAttribute="bottom" constant="118" id="hNI-3f-lh8">
+                    <variation key="heightClass=regular-widthClass=compact" constant="117"/>
+                </constraint>
+                <constraint firstAttribute="trailing" secondItem="bC3-hm-B88" secondAttribute="trailing" constant="120" id="mHa-Ut-bhJ">
+                    <variation key="heightClass=regular-widthClass=compact" constant="90"/>
+                </constraint>
+                <constraint firstItem="X4M-7e-UuV" firstAttribute="top" secondItem="V5j-BD-jGg" secondAttribute="bottom" constant="89" id="naE-cR-Oon"/>
                 <constraint firstItem="X4M-7e-UuV" firstAttribute="top" secondItem="V5j-BD-jGg" secondAttribute="bottom" constant="70" id="ra9-dd-RRM"/>
                 <constraint firstItem="V5j-BD-jGg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="39" id="w2J-KX-bV4"/>
             </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="bC3-hm-B88"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="LfJ-yh-2JF"/>
+                    <exclude reference="Xd5-z4-LhQ"/>
+                    <exclude reference="c0B-P8-DKr"/>
+                    <exclude reference="naE-cR-Oon"/>
+                    <exclude reference="B6c-Iw-qcW"/>
+                    <exclude reference="hNI-3f-lh8"/>
+                    <exclude reference="mHa-Ut-bhJ"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="bC3-hm-B88"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="LfJ-yh-2JF"/>
+                    <include reference="Xd5-z4-LhQ"/>
+                    <include reference="c0B-P8-DKr"/>
+                    <exclude reference="w2J-KX-bV4"/>
+                    <exclude reference="R0i-jy-Jfz"/>
+                    <exclude reference="bCm-tp-lKf"/>
+                    <include reference="naE-cR-Oon"/>
+                    <exclude reference="ra9-dd-RRM"/>
+                    <include reference="B6c-Iw-qcW"/>
+                    <include reference="hNI-3f-lh8"/>
+                    <include reference="mHa-Ut-bhJ"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>

@@ -31,7 +31,9 @@ static NSString *reuseID = @"reuseID";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height)];
+    self.title = @"Rounds";
+    
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
@@ -64,11 +66,15 @@ static NSString *reuseID = @"reuseID";
     return @[@25, @5, @25, @5, @25, @5, @25, @15];
 }
 
+-(NSArray *) roundImages {
+    return @[[UIImage imageNamed:@"1"],[UIImage imageNamed:@"2"],[UIImage imageNamed:@"1"],[UIImage imageNamed:@"2"],[UIImage imageNamed:@"1"],[UIImage imageNamed:@"2"],[UIImage imageNamed:@"1"],[UIImage imageNamed:@"3"]];
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ minutes", [self roundTimes][indexPath.row]];
-    
+    cell.imageView.image = [self roundImages][indexPath.row];
     return cell;
     
 }

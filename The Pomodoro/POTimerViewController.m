@@ -12,6 +12,7 @@
 @interface POTimerViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
 @property (strong, nonatomic) IBOutlet UILabel *roundLabel;
+@property (strong, nonatomic) IBOutlet UIButton *stopButton;
 
 @end
 
@@ -66,7 +67,14 @@
 // Implements startButton action
 - (IBAction)startRound:(id)sender {
     self.startButton.enabled = NO;
+    self.stopButton.enabled = YES;
     [[POTimer sharedInstance] startTimer];
+}
+- (IBAction)stopRound:(id)sender {
+    self.startButton.enabled = YES;
+    self.stopButton.enabled = NO;
+    
+    [[POTimer sharedInstance]cancelTimer];
 }
 
 #pragma mark - updateTimerLabel
