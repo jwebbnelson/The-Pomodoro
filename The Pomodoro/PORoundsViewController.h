@@ -10,4 +10,6 @@
 
 @interface PORoundsViewController : UIViewController
 
+@property (nonatomic, strong)UITableViewCell *cell;
+
 @end

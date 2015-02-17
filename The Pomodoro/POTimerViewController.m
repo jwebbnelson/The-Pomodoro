@@ -8,6 +8,7 @@
 
 #import "POTimerViewController.h"
 #import "POTimer.h"
+#import "PORoundsViewController.h"
 
 @interface POTimerViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
@@ -56,6 +57,7 @@
 -(void) respondToCurrentRound {
     [self updateTimerLabel];
     self.startButton.enabled = YES;
+    self.stopButton.enabled = NO;
 }
 
 - (void)viewDidLoad {
@@ -82,11 +84,11 @@
     NSInteger minutes = [POTimer sharedInstance].minutes;
     NSInteger seconds = [POTimer sharedInstance].seconds;
     
-    self.roundLabel.text = [self timerStringWithMinutes:minutes andSeconds:seconds];
+    self.roundLabel.text = [POTimerViewController timerStringWithMinutes:minutes andSeconds:seconds];
 }
 
 // Returns Timer String in correct format
-- (NSString *)timerStringWithMinutes:(NSInteger)minutes andSeconds:(NSInteger)seconds
++ (NSString *)timerStringWithMinutes:(NSInteger)minutes andSeconds:(NSInteger)seconds
     {
         NSString *timerString;
         if (minutes >= 10)

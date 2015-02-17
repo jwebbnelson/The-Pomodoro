@@ -8,6 +8,7 @@
 
 #import "PORoundsViewController.h"
 #import "POTimer.h"
+#import "POTimerViewController.h"
 
 static NSString *reuseID = @"reuseID";
 
@@ -16,7 +17,7 @@ static NSString *reuseID = @"reuseID";
 @property (nonatomic, assign) NSInteger currentRound;
 @property (nonatomic, strong) UITableView * tableView;
 
-
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @end
 
 @implementation PORoundsViewController
@@ -47,6 +48,8 @@ static NSString *reuseID = @"reuseID";
 #pragma mark - registerForNotifications
 -(void) registerForNotifications {
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(respondToRoundComplete:) name:@"roundCompleteNotification"  object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateDetailLabel) name:@"secondTickNotification" object:nil];
+    
 }
 
 
@@ -72,16 +75,24 @@ static NSString *reuseID = @"reuseID";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID];
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID];
+    UITableViewCell *cell  = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseID];
+    
     cell.textLabel.text = [NSString stringWithFormat:@"%@ minutes", [self roundTimes][indexPath.row]];
     cell.imageView.image = [self roundImages][indexPath.row];
-    return cell;
     
+    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.currentRound = indexPath.row;
     [self roundSelected];
+    
+    
+    
+    self.selectedIndexPath = indexPath;
+    [self updateDetailLabel];
+    
 }
 
 
@@ -99,6 +110,19 @@ static NSString *reuseID = @"reuseID";
     [[NSNotificationCenter defaultCenter]postNotificationName:@"currentRoundNotification" object:nil];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+   
+}
+
+-(void)updateDetailLabel {
+    NSInteger minutes = [POTimer sharedInstance].minutes;
+    NSInteger seconds = [POTimer sharedInstance].seconds;
+    
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath: self.selectedIndexPath];
+    
+    cell.detailTextLabel.text =[POTimerViewController timerStringWithMinutes:minutes andSeconds:seconds];
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -10,6 +10,7 @@
 
 @interface POTimerViewController : UIViewController
 
++ (NSString *)timerStringWithMinutes:(NSInteger)minutes andSeconds:(NSInteger)seconds;
 
 
 
