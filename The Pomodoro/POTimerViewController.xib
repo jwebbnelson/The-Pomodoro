@@ -17,8 +17,12 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5j-BD-jGg">
-                    <rect key="frame" x="182" y="110" width="237" height="227"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5j-BD-jGg">
+                    <rect key="frame" x="182" y="39" width="237" height="227"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="227" id="RxE-Re-vl3"/>
+                        <constraint firstAttribute="width" constant="237" id="x8d-km-Lbg"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="29"/>
                     <state key="normal" title="START">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -28,7 +32,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Round:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4M-7e-UuV">
-                    <rect key="frame" x="184" y="395" width="233" height="102"/>
+                    <rect key="frame" x="184" y="336" width="233" height="102"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="233" id="Uj7-xS-frj"/>
                         <constraint firstAttribute="height" constant="102" id="VEu-Ot-lok"/>
@@ -41,9 +45,9 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="X4M-7e-UuV" firstAttribute="centerX" secondItem="V5j-BD-jGg" secondAttribute="centerX" id="R0i-jy-Jfz"/>
-                <constraint firstItem="X4M-7e-UuV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WWv-2G-STW"/>
-                <constraint firstAttribute="bottom" secondItem="X4M-7e-UuV" secondAttribute="bottom" constant="103" id="eSv-4N-0Et"/>
-                <constraint firstItem="X4M-7e-UuV" firstAttribute="top" secondItem="V5j-BD-jGg" secondAttribute="bottom" constant="58" id="ra9-dd-RRM"/>
+                <constraint firstItem="X4M-7e-UuV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bCm-tp-lKf"/>
+                <constraint firstItem="X4M-7e-UuV" firstAttribute="top" secondItem="V5j-BD-jGg" secondAttribute="bottom" constant="70" id="ra9-dd-RRM"/>
+                <constraint firstItem="V5j-BD-jGg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="39" id="w2J-KX-bV4"/>
             </constraints>
         </view>
     </objects>

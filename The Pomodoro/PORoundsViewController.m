@@ -85,6 +85,7 @@ static NSString *reuseID = @"reuseID";
 
 #pragma mark - roundSelected
 -(void) roundSelected {
+    [[POTimer sharedInstance]cancelTimer];
     // Update the minutes and seconds on the [POTimer sharedInstance] from the currentRound property
     [POTimer sharedInstance].minutes = [[self roundTimes][self.currentRound]integerValue];
     [POTimer sharedInstance].seconds = 0;
