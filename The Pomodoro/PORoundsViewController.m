@@ -7,6 +7,7 @@
 //
 
 #import "PORoundsViewController.h"
+#import "POTimer.h"
 
 static NSString *reuseID = @"reuseID";
 
@@ -43,21 +44,21 @@ static NSString *reuseID = @"reuseID";
 
 #pragma mark - registerForNotifications
 -(void) registerForNotifications {
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(respondToRoundComplete:) name:@"RoundCompleteNotification"  object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(respondToRoundComplete:) name:@"roundCompleteNotification"  object:nil];
 }
 
 
 
 -(void)respondToRoundComplete: (NSNotification *)notification {
-    if (self.currentRound < [self roundTimes].count -1) {
+    if (self.currentRound < [self roundTimes].count - 1)
+    {
         self.currentRound++;
         [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentRound inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
         [self roundSelected];
-        
     }
-    
 }
 
+#pragma mark - tableViewDataSource methods
 
 -(NSArray *) roundTimes {
     return @[@25, @5, @25, @5, @25, @5, @25, @15];
@@ -72,22 +73,23 @@ static NSString *reuseID = @"reuseID";
     
 }
 
--(void) roundSelected {
-//    that will update the minutes and seconds on the [POTimer sharedInstance] from the currentRound property
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"currentRoundNotification" object:nil];
-    
-}
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    self.currentRound = indexPath;
+    self.currentRound = indexPath.row;
     [self roundSelected];
-    
 }
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self roundTimes].count;
+}
 
+#pragma mark - roundSelected
+-(void) roundSelected {
+    // Update the minutes and seconds on the [POTimer sharedInstance] from the currentRound property
+    [POTimer sharedInstance].minutes = [[self roundTimes][self.currentRound]integerValue];
+    [POTimer sharedInstance].seconds = 0;
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"currentRoundNotification" object:nil];
 }
 
 
@@ -95,15 +97,5 @@ static NSString *reuseID = @"reuseID";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

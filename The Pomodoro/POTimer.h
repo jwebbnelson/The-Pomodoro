@@ -15,6 +15,7 @@
 
 @property (nonatomic,assign) BOOL isOn;
 
++ (POTimer *)sharedInstance;
 
 -(void)startTimer;
 -(void)cancelTimer;

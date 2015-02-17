@@ -7,6 +7,7 @@
 //
 
 #import "POTimerViewController.h"
+#import "POTimer.h"
 
 @interface POTimerViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
@@ -16,25 +17,41 @@
 
 @implementation POTimerViewController
 
-- (instancetype)init
+// Instantiate with Nib
+-(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super init];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self registerForNotifications];
     }
     return self;
 }
 
+#pragma mark - registerForNotifications
 - (void)registerForNotifications {
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(respondToSecondTick) name:@"secondTickNotification" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(respondToCurrentRound) name:@"currentRoundNotification" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(respondToCurrentRound) name:@"roundCompleteNotification" object:nil];
 }
 
+#pragma mark - unregisterForNotifications
+- (void) unregisterForNotifications {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
+#pragma mark - dealloc
+-(void)dealloc {
+    [self unregisterForNotifications];
+}
+
+// Updates TimerLabel
 - (void) respondToSecondTick {
     [self updateTimerLabel];
-    
+ 
 }
 
+#pragma mark - respondToCurrentRound
+// New Round
 -(void) respondToCurrentRound {
     [self updateTimerLabel];
     self.startButton.enabled = YES;
@@ -45,30 +62,47 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+#pragma mark - startRound
+// Implements startButton action
+- (IBAction)startRound:(id)sender {
+    self.startButton.enabled = NO;
+    [[POTimer sharedInstance] startTimer];
+}
+
+#pragma mark - updateTimerLabel
+-(void)updateTimerLabel {
+    NSInteger minutes = [POTimer sharedInstance].minutes;
+    NSInteger seconds = [POTimer sharedInstance].seconds;
+    
+    self.roundLabel.text = [self timerStringWithMinutes:minutes andSeconds:seconds];
+}
+
+// Returns Timer String in correct format
+- (NSString *)timerStringWithMinutes:(NSInteger)minutes andSeconds:(NSInteger)seconds
+    {
+        NSString *timerString;
+        if (minutes >= 10)
+        {
+            timerString = [NSString stringWithFormat:@"%li:", (long)minutes];
+        }
+        else
+        {
+            timerString = [NSString stringWithFormat:@"0%li:", (long)minutes];
+        }
+        if (seconds >= 10)
+        {
+            timerString = [timerString stringByAppendingString:[NSString stringWithFormat:@"%li", (long)seconds]];
+        }
+        else
+        {
+            timerString = [timerString stringByAppendingString:[NSString stringWithFormat:@"0%li", (long)seconds]];
+        }
+        return timerString;
+    }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (IBAction)startRound:(id)sender {
-    
-}
-
--(void)updateTimerLabel {
-    
-}
-
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
