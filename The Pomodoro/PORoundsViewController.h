@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong)UITableViewCell *cell;
 
++ (void)roundsLocalNotification;
+
 @end

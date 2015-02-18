@@ -7,6 +7,7 @@
 //
 
 #import "POTimer.h"
+#import "PORoundsViewController.h"
 
 @implementation POTimer
 
@@ -24,6 +25,8 @@
 -(void)startTimer{
     self.isOn = YES;
     [self isActive];
+    [PORoundsViewController roundsLocalNotification];
+    
 }
 
 #pragma mark - cancelTimer

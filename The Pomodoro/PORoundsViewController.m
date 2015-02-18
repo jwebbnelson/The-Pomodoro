@@ -52,7 +52,7 @@ static NSString *reuseID = @"reuseID";
 #pragma mark - tableViewDataSource methods
 
 -(NSArray *) roundTimes {
-    return @[@25, @0, @25, @5, @25, @5, @25, @15];
+    return @[@25, @1, @25, @5, @25, @5, @25, @15];
 }
 
 -(NSArray *) roundImages {
@@ -97,9 +97,6 @@ static NSString *reuseID = @"reuseID";
     [[NSNotificationCenter defaultCenter]postNotificationName:@"currentRoundNotification" object:nil];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-   
-}
 
 -(void)updateDetailLabel {
     NSInteger minutes = [POTimer sharedInstance].minutes;
@@ -145,6 +142,29 @@ static NSString *reuseID = @"reuseID";
     }
 }
 
++ (void)roundsLocalNotification {
+    NSInteger minutes = [POTimer sharedInstance].minutes;
+    NSInteger seconds = [POTimer sharedInstance].seconds;
+    
+    
+    NSDate *fireTime = [[NSDate date]dateByAddingTimeInterval:(minutes * 60)+seconds];
+    
+    UILocalNotification *localNotification = [UILocalNotification new];
+    if(localNotification){
+        localNotification.soundName = @"bell_tree.mp3";
+        localNotification.fireDate = fireTime;
+        localNotification.alertBody = @"Round complete!";
+        localNotification.applicationIconBadgeNumber = -1;
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        [[UIApplication sharedApplication] scheduleLocalNotification: localNotification];
+    }
+}
+
+
+
+-(void)viewDidAppear:(BOOL)animated {
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
