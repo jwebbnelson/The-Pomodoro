@@ -50,8 +50,8 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="41"/>
                     <nil key="highlightedColor"/>
-                    <color key="shadowColor" red="0.88465896759999996" green="0.88502031709999995" blue="0.89733684390000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <size key="shadowOffset" width="6" height="2"/>
+                    <color key="shadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <size key="shadowOffset" width="9" height="5"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="BOb-gZ-aeT"/>

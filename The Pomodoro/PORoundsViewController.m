@@ -75,7 +75,6 @@ static NSString *reuseID = @"reuseID";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID];
     UITableViewCell *cell  = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseID];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ minutes", [self roundTimes][indexPath.row]];
@@ -88,13 +87,15 @@ static NSString *reuseID = @"reuseID";
     self.currentRound = indexPath.row;
     [self roundSelected];
     
-    
-    
     self.selectedIndexPath = indexPath;
     [self updateDetailLabel];
     
 }
 
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.detailTextLabel.text = @"";
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self roundTimes].count;
