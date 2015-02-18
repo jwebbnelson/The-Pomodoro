@@ -12,6 +12,4 @@
 
 + (NSString *)timerStringWithMinutes:(NSInteger)minutes andSeconds:(NSInteger)seconds;
 
-
-
 @end

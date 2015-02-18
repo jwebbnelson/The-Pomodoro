@@ -41,32 +41,18 @@ static NSString *reuseID = @"reuseID";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuseID];
     
     [self.view addSubview:self.tableView];
-    
-    
 }
 
 #pragma mark - registerForNotifications
 -(void) registerForNotifications {
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(respondToRoundComplete:) name:@"roundCompleteNotification"  object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(roundCompleteNotification) name:@"roundCompleteNotification"  object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateDetailLabel) name:@"secondTickNotification" object:nil];
-    
-}
-
-
-
--(void)respondToRoundComplete: (NSNotification *)notification {
-    if (self.currentRound < [self roundTimes].count - 1)
-    {
-        self.currentRound++;
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentRound inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
-        [self roundSelected];
-    }
 }
 
 #pragma mark - tableViewDataSource methods
 
 -(NSArray *) roundTimes {
-    return @[@25, @5, @25, @5, @25, @5, @25, @15];
+    return @[@25, @0, @25, @5, @25, @5, @25, @15];
 }
 
 -(NSArray *) roundImages {
@@ -121,8 +107,42 @@ static NSString *reuseID = @"reuseID";
     
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath: self.selectedIndexPath];
     
-    cell.detailTextLabel.text =[POTimerViewController timerStringWithMinutes:minutes andSeconds:seconds];
+    if ([POTimer sharedInstance].minutes == 0 && [POTimer sharedInstance].seconds == 0) {
+         cell.detailTextLabel.text = nil;
+    } else {
+        cell.detailTextLabel.text =[POTimerViewController timerStringWithMinutes:minutes andSeconds:seconds];
+    }
 
+}
+
+-(void)roundCompleteNotification {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Round is complete" message:@"Select an option:" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Next round" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [self respondToRoundComplete];}]];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil]];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+#pragma mark - respondToRoundComplete
+// Response to "Next Round" selection of alertcontoller
+-(void)respondToRoundComplete {
+    NSInteger row = self.selectedIndexPath.row;
+    row ++;
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    self.selectedIndexPath = indexPath;
+    [self updateDetailLabel];
+    
+    if (self.currentRound < [self roundTimes].count - 1)
+    {
+        self.currentRound++;
+        
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentRound inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [self roundSelected];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,7 +8,6 @@
 
 #import "POTimer.h"
 
-
 @implementation POTimer
 
 + (POTimer *)sharedInstance {
@@ -57,6 +56,7 @@
     }
 }
 
+
 #pragma mark - isActive 
 -(BOOL)isActive{
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
@@ -70,6 +70,5 @@
     
     return self.isOn;
 }
-
 
 @end
